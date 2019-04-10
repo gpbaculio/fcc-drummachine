@@ -17,14 +17,41 @@ body {
   padding: 2%;
   background-color: #fff;
 }
-.pad {
+.drum-pad {
   height: 3rem;
   width: 3rem;
-  background-color: #006400;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
   color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 3px #999;
+}
+.drum-pad:hover {background-color: #3e8e41}
+
+.drum-pad:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(2px);
 }
 .mode {
   background-color: #4D4D4D;
   color: #fff;
+  height: 44px;
   padding: .50rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .drum-container {
+    flex-direction: column;
+  }
+  .pad-container, .controls-container {
+    width: 100%!important;
+  }
+  .pad {
+    margin: .75rem!important;
+  }
 }

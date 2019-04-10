@@ -1,79 +1,54 @@
-import React, { Component, useState } from 'react';
-import Toggle from 'react-toggle';
+import React, { Component } from 'react';
+import { Pad, Power, Mode, Bank, Volume } from './components';
+import { connect } from 'react-redux';
 import './App.css';
 import 'react-toggle/style.css';
+import { AppState } from './store';
 
-interface AppProps {}
-interface AppState {
+interface AppProps {
+  power: boolean;
+}
+interface AppComponentState {
   [key: string]: boolean;
 }
-class App extends Component<AppProps, AppState> {
+class App extends Component<AppProps, AppComponentState> {
   state = {
     power: false,
     bank: false
   };
+
   handleToggle = (key: string) => {
-    const { key: val }: any = this.state;
+    const { key: val }: AppComponentState = this.state;
     this.setState({ [key]: val });
   };
   render() {
     return (
-      <div className='App d-flex justify-content-center align-items-center'>
+      <div
+        id='drum-machine'
+        className='App d-flex justify-content-center align-items-center'>
         <div className='drum-container d-flex'>
-          <div className='pad-container w-50 d-flex flex-column'>
+          <div className='pad-container justify-content-center align-items-center w-50 d-flex flex-column'>
             <div className='d-flex'>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                Q
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                W
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                E
-              </div>
+              <Pad keypad={'Q'} />
+              <Pad keypad={'W'} />
+              <Pad keypad={'E'} />
             </div>
             <div className='d-flex'>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                A
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                S
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                D
-              </div>
+              <Pad keypad={'A'} />
+              <Pad keypad={'S'} />
+              <Pad keypad={'D'} />
             </div>
             <div className='d-flex'>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                Z
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                X
-              </div>
-              <div className='pad m-3 d-flex justify-content-center align-items-center'>
-                C
-              </div>
+              <Pad keypad={'Z'} />
+              <Pad keypad={'X'} />
+              <Pad keypad={'C'} />
             </div>
           </div>
-          <div className='controls-container w-50 d-flex flex-column justify-content-between align-items-center'>
-            <div className='d-flex flex-column'>
-              <div className='text-center'>Power</div>
-              <Toggle
-                defaultChecked={this.state.power}
-                icons={false}
-                onChange={() => this.handleToggle('power')}
-              />
-            </div>
-            <div className='mode'>Mode</div>
-            <input type='range' />
-            <div className='d-flex flex-column'>
-              <div className='text-center'>Bank</div>
-              <Toggle
-                defaultChecked={this.state.bank}
-                icons={false}
-                onChange={() => this.handleToggle('bank')}
-              />
-            </div>
+          <div className='controls-container my-1 w-50 d-flex flex-column justify-content-between align-items-center'>
+            <Power />
+            <Mode />
+            <Volume />
+            <Bank />
           </div>
         </div>
       </div>
@@ -81,4 +56,8 @@ class App extends Component<AppProps, AppState> {
   }
 }
 
-export default App;
+const mapStateToProps = ({ drumPad }: AppState) => ({
+  power: drumPad.power
+});
+
+export default connect(mapStateToProps)(App);
