@@ -25,7 +25,8 @@ class App extends Component<AppProps, AppComponentState> {
     return (
       <div
         id='drum-machine'
-        className='App d-flex justify-content-center align-items-center'>
+        className='App d-flex flex-column justify-content-center align-items-center'>
+        <div className='my-3'>Turn on power before running tests</div>
         <div className='drum-container d-flex'>
           <div className='pad-container justify-content-center align-items-center w-50 d-flex flex-column'>
             <div className='d-flex'>

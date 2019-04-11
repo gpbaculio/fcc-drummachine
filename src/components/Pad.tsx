@@ -29,7 +29,7 @@ class Pad extends Component<PadProps> {
   playSound = () => {
     const { keypad, bankMode, power, setMode, volume } = this.props;
     const sound = document.getElementById(
-      bank[bankMode][keypad].id
+      bank[bankMode][keypad].keyTrigger
     ) as HTMLAudioElement;
     if (power && sound !== null) {
       sound.currentTime = 0;
@@ -43,12 +43,12 @@ class Pad extends Component<PadProps> {
     const { keypad, bankMode } = this.props;
     return (
       <div
-        id={keypad}
+        id={bank[bankMode][keypad].id}
         onClick={this.playSound}
         className='drum-pad m-3 d-flex justify-content-center align-items-center'>
         <audio
           className='clip'
-          id={bank[bankMode][keypad].id}
+          id={bank[bankMode][keypad].keyTrigger}
           src={bank[bankMode][keypad].url}
         />
         {keypad}
